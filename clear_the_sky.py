@@ -22,9 +22,6 @@ YELLOW_LASER = pygame.transform.scale(pygame.image.load(os.path.join("Items", "p
 
 BG = pygame.transform.scale(pygame.image.load(os.path.join("assets", "skyBackground.png")), (WIDTH, HEIGHT))
 
-BULLET_HIT_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'Grenade+1.mp3'))
-BULLET_FIRE_SOUND = pygame.mixer.Sound(os.path.join('Assets', 'Gun+Silencer.mp3'))
-
 class Laser:
     def __init__(self, x, y, img):
         self.x = x
@@ -227,7 +224,6 @@ def main():
             player.y += player_vel
         if keys[pygame.K_SPACE]:
             player.shoot()
-            BULLET_FIRE_SOUND.play()
 
         for enemy in enemies[:]:
             enemy.move(enemy_vel)
@@ -239,7 +235,6 @@ def main():
             if collide(enemy, player):
                 player.health -= 10
                 enemies.remove(enemy)
-                BULLET_HIT_SOUND.play()
             elif enemy.y + enemy.get_height() > HEIGHT:
                 lives -= 1
                 enemies.remove(enemy)
